@@ -1,0 +1,60 @@
+<br><br>
+<div class="container-fluid text-center">
+  <div class="col-lg-8 col-lg-offset-2">
+    <button type="button" class="btn btn-success col-lg-offset-8" (click)="create()"> Dodaj nalog</button>
+    <h1 class="text-center"> Nalozi</h1>
+    <br><br>
+    <table class="table table-hover  text-left">
+      <thead>
+      <th>Klijent</th>
+      <th>Broj računa</th>
+      <th>Stanje</th>
+      <th>Limit</th>
+      <th>Banka</th>
+      <th>Izmena</th>
+      <th>Brisanje</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let account of accounts">
+        <td>{{account.client.name}} {{account.client.surname}}</td>
+        <td>{{account.number}}</td>
+        <td>{{account.balance}}</td>
+        <td>{{account.limit}}</td>
+        <td>{{account.bank.name}}</td>
+
+
+        <td>
+          <button type="button" class="btn btn-primary" (click)="edit(account.id)">Izmeni</button>
+        </td>
+
+        <td>
+          <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#del' + account.id">
+            Brisanje
+          </button>
+          <div class="modal fade" id="del{{account.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="deleteModal">Brisanje naloga</h4>
+                </div>
+                <div class="modal-body" style="max-height: 420px; overflow-y: auto;">
+                  Da li ste sigurni da želite da obrišete <b>{{account.number}}</b>?
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger" (click)="delete(account.id)" data-dismiss="modal">Obriši</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">zatvori</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+
+    <div [hidden]="deleteStatusCode==null" class="col-lg-4 col-lg-offset-4">
+      <div *ngIf="deleteStatusCode!=200" class="alert alert-danger">Greška prilikom brisanja</div>
+    </div>
+  </div>
+</div>

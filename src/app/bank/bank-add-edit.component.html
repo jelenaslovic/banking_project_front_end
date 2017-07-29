@@ -1,0 +1,60 @@
+<br><br><br><br>
+<div class="container-fluid">
+  <h1 class="text-center">{{bank.id ? 'Izmena banke' : 'Dodavanje banke'}}</h1>
+  <br>
+  <form class="col-lg-4 col-lg-offset-4" #bankForm="ngForm">
+
+    <input [(ngModel)]="bank.id" type="hidden" id="id" name="id">
+
+    <div class="form-group">
+      <label for="name">Naziv banke:</label>
+      <input [(ngModel)]="bank.name" type="text" class="form-control" id="name" placeholder="Naziv banke" name="name"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="pib">PIB:</label>
+      <input [(ngModel)]="bank.pib" type="text" class="form-control" id="pib" placeholder="PIB"
+             name="pib" required>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Adresa:</label>
+      <input [(ngModel)]="bank.address" type="text" class="form-control" id="address"
+             placeholder="Adresa" name="address" required>
+    </div>
+
+    <div class="form-group col-lg-8 col-lg-offset-2">
+      <label for="city">Grad:</label>
+      <select name="city" [(ngModel)]="bank.city" class="form-control" id="city" required>
+        <option>Izberite grad</option>
+        <option *ngFor="let city of cities" [ngValue]="city">
+          {{city}}
+        </option>
+      </select>
+    </div>
+
+
+    <div class="form-group col-lg-8 col-lg-offset-2">
+      <label for="country">Država:</label>
+      <select name="country" [(ngModel)]="bank.country" class="form-control" id="country" required>
+        <option>Izberite državu</option>
+        <option *ngFor="let country of countries" [ngValue]="country">
+          {{country}}
+        </option>
+      </select>
+    </div>
+
+    <div class="row">
+      <button [disabled]="!bankForm.form.valid" type="submit" class="btn btn-primary col-lg-4 col-lg-offset-4"
+              (click)=' bank.id ? update(bank): create(bank)'>Dodaj
+      </button>
+
+      <button *ngIf="bank.id == null" class="btn btn-default col-lg-2 col-lg-offset-1" type="submit"
+              (click)="bankForm.form.reset()">Resetuj
+      </button>
+    </div>
+    <br>
+  </form>
+</div>
+

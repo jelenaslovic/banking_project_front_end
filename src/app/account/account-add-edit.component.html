@@ -1,0 +1,54 @@
+<br><br><br><br>
+<div class="container-fluid">
+  <h1 class="text-center">{{account.id != null ? 'Izmena računa' : 'Dodavanje računa'}}</h1>
+  <br>
+  <form class="col-lg-4 col-lg-offset-4" #accountForm="ngForm">
+    <div *ngIf="account.id != null">
+      <input [(ngModel)]="account.id" type="hidden" id="id" name="id">
+    </div>
+    <div class="form-group">
+      <label for="balance">Stanje:</label>
+      <input [(ngModel)]="account.balance" type="text" class="form-control" id="balance" placeholder="Stanje"
+             name="balance"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="limit">Limit:</label>
+      <input [(ngModel)]="account.limit" type="text" class="form-control" id="limit" placeholder="limit" name="limit"
+             required>
+    </div>
+    <span *ngIf="account.id == null">
+    <div class="form-group col-lg-8 col-lg-offset-2">
+      <label for="banks">Banka:</label>
+      <select name="bank" [(ngModel)]="account.bank" class="form-control" id="banks">
+        <option value="0" selected>Izberite banku</option>
+        <option *ngFor="let bank of banks" [ngValue]="bank">{{bank.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-lg-8 col-lg-offset-2">
+      <label for="client">Klijent:</label>
+      <select name="client" [(ngModel)]="account.client" class="form-control" id="client">
+        <option value="0" selected>Izberite klijenta</option>
+        <option *ngFor="let client of clients" [ngValue]="client">{{client.name}} {{client.surname}}</option>
+      </select>
+    </div>
+  </span>
+
+
+    <div class="row">
+      <button [disabled]="!accountForm.form.valid" type="submit" class="btn btn-primary col-lg-4 col-lg-offset-4"
+              (click)=' account.id ? update(account): create(account)'>
+        <span *ngIf="account.id == null">Dodaj</span>
+        <span *ngIf="account.id != null">Izmeni</span>
+      </button>
+
+      <button *ngIf="account.id == null" class="btn btn-default col-lg-2 col-lg-offset-1" type="submit"
+              (click)="accountForm.form.reset()">Resetuj
+      </button>
+    </div>
+    <br>
+  </form>
+</div>
+

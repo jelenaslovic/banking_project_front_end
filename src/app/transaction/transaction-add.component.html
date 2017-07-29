@@ -1,0 +1,56 @@
+<br><br><br><br>
+<div class="container-fluid">
+  <h1 class="text-center">Kreiranje transakcije</h1>
+  <br>
+  <form class="col-lg-4 col-lg-offset-4" #transactionForm="ngForm">
+    <div *ngIf="transaction.id != null">
+      <input [(ngModel)]="transaction.id" type="hidden" id="id" name="id">
+    </div>
+    <div class="form-group">
+      <label for="amount">Iznos:</label>
+      <input [(ngModel)]="transaction.amount" type="text" class="form-control" id="amount" placeholder="Iznos"
+             name="amount"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label for="purpose">Svrha uplate:</label>
+      <input [(ngModel)]="transaction.purpose" type="text" class="form-control" id="purpose" placeholder="Svrha uplate"
+             name="purpose"
+             required>
+    </div>
+
+    <div class="form-group col-lg-8 col-lg-offset-2">
+      <label for="senderAccount">Pošiljalac:</label>
+      <select name="senderAccount" [(ngModel)]="transaction.senderAccount" class="form-control" id="senderAccount">
+        <option>Izberite pošiljaoca</option>
+        <option *ngFor="let account of accounts" [ngValue]="account">
+          {{account.client.name}} {{account.client.surname}} - {{account.number}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group col-lg-8 col-lg-offset-2">
+      <label for="receiverAccount">Primalac:</label>
+      <select name="receiverAccount" [(ngModel)]="transaction.receiverAccount" class="form-control"
+              id="receiverAccount">
+        <option>Izberite primaoca</option>
+        <option *ngFor="let account of accounts" [ngValue]="account">
+          {{account.client.name}} {{account.client.surname}} - {{account.number}}
+        </option>
+      </select>
+    </div>
+
+    <div class="row">
+      <button [disabled]="!transactionForm.form.valid" type="submit" class="btn btn-primary col-lg-4 col-lg-offset-4"
+              (click)='create(transaction)'>Dodaj
+      </button>
+
+      <button *ngIf="transaction.id == null" class="btn btn-default col-lg-2 col-lg-offset-1" type="submit"
+              (click)="transactionForm.form.reset()">Resetuj
+      </button>
+    </div>
+    <br>
+  </form>
+</div>
+

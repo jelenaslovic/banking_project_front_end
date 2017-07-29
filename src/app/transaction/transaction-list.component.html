@@ -1,0 +1,37 @@
+<br><br>
+<div class="container-fluid text-center">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="form-group col-lg-4 col-lg-offset-8">
+      <label for="clients">Klijent:</label>
+      <select class="form-control " (change)="findByClient($event.target.value)" id="clients">
+        <option [value]="0">Izberite klijenta</option>
+        <option *ngFor="let client of clients" [value]="client.id">{{client.name}} {{client.surname}}</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-success col-lg-offset-8" (click)="create()"> Kreiraj transakciju</button>
+    <h1 class="text-center">Transakcije</h1>
+    <br><br>
+    <table class="table table-hover text-left">
+      <thead>
+      <th>Iznos</th>
+      <th>Pošiljalac</th>
+      <th>Račun pošiljaoca</th>
+      <th>Primalac</th>
+      <th>Račun primaoca</th>
+      <th>Svrha</th>
+      <th>Datum</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{transaction.amount}}</td>
+        <td>{{transaction.senderAccount.client.name}} {{transaction.senderAccount.client.surname}}</td>
+        <td> {{transaction.senderAccount.number}}</td>
+        <td>{{transaction.receiverAccount.client.name}} {{transaction.receiverAccount.client.surname}}</td>
+        <td> {{transaction.receiverAccount.number}}</td>
+        <td>{{transaction.purpose}}</td>
+        <td>{{transaction.date}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

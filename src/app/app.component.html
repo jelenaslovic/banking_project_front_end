@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Projekat</title>
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Projekat</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a [routerLink]=" ['./banks']">Banke</a></li>
+      <li><a [routerLink]=" ['./clients']">Klijenti</a></li>
+      <li><a [routerLink]=" ['./accounts']">Računi</a></li>
+      <li><a [routerLink]=" ['./transactions']">Transakcije</a></li>
+    </ul>
+    <router-outlet></router-outlet>
+  </div>
+</nav>
+</body>
+</html>
